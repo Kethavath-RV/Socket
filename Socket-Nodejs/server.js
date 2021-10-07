@@ -109,22 +109,30 @@ io.on('connection',async (socket) => {
           console.log(url)
           console.log("length is ",(socketServer.port).length)
           //socket2 = serverClient.connect(url,{ reconnect: true})
-          const usr = {
-            userId:12345,
-            userName:"temp"
-          }
-          let SenderId = socket.user.userId
-          let SenderName = socket.user.userName
-          //console.log(userId, userName)
+          if(port == socketServer.port){
 
-          socket2 = serverClient(url, {
+            socket.broadcast.to(recieverSocketId).emit('message',outgoingMessage);
+
+          }else{
+
+            const usr = {
+              userId:12345,
+              userName:"temp"
+            }
+
+            let SenderId = socket.user.userId
+            let SenderName = socket.user.userName
+  
+            socket2 = serverClient(url, {
               auth: {
                 user: usr 
               }
             });
             console.log("connected")
-            console.log("iiiii", recieverSocketId)
+            
             socket2.emit("message",{message,recieverSocketId,SenderId,SenderName})
+
+          }
         })
       }
     })
