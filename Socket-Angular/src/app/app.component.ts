@@ -23,7 +23,7 @@ export class AppComponent {
     userName:'',
     i:'',
   })
-
+  bc
   constructor(private socService:SocketioService, private formBuilder:FormBuilder){}
   ngOnInit(){
     // let tempArray = localStorage.getItem("msgs")
